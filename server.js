@@ -1,12 +1,7 @@
 const express = require("express");
-const admin = require("./routes/admin")
-const router = require("./routes/teacher");
-const student = require("./routes/student");
-const leave = require("./routes/leave");
-const timetable = require("./routes/timetable");
-const attendance = require("./routes/attendance");
-const login = require("./routes/login")
 const crossOrgin = require("cors");
+const Login = require("./routes/logindata");
+const Employeelist = require("./routes/employeelist")
 require("./connection");
 const app = express();
 const key = "Basic U2FtOjIwNTY=";
@@ -17,13 +12,8 @@ app.use(function (req, res, next) {
     if (req.headers.authorization === key) next();
     else { res.send(" invalid data") }
 })
-app.use("/Admin", admin);
-app.use("/Teacher", router);
-app.use("/Student", student);
-app.use("/Leave", leave);
-app.use("/Timetable", timetable);
-app.use("/Attendance", attendance);
-app.use("/Login", login)
+app.use("/login", Login);
+app.use("/employee", Employeelist);
 app.listen(3000, () => {
     console.log("started")
 })
